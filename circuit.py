@@ -42,11 +42,11 @@ class circuit :
         pass
 
     
-
-
-circuit1 = circuit([battery(9),resistor(10)])
-print()
-print(
-    circuit1.startFlow()
-)
-print()
+if __name__ == "__main__":
+    
+    circuit1 = circuit([battery(9),resistor(10)])
+    print()
+    print(
+        circuit1.startFlow()
+    )
+    print()
