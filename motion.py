@@ -2,22 +2,36 @@ import math
 import matplotlib.pyplot as plt
 import numpy as np
 
-# some global functions ---------------- --------------- ------------ #
-
-def posi(num) :
-    if num < 0 :
-        return -1*num
-    else :
-        return num
-# ------------- ------------- --------------- ------------ ---------- #
-
 class thing :
+    '''
+      Created a class called thing, which will be the object you throw.
+      To use this, you first have to create an object, which you do as follows :
 
+          thingName = thing()
+
+      after you create the object to be thrown, you have two methods with 
+      which you throw, throw_from_ground and throw_horizontally, both of which
+      are explained below. To finally throw the thing, just do :
+
+          thingName.throw_horizontally(velocity,height)
+      or
+          thingName.throw_from_ground(velocity,angle)
+    '''
     def __init__(self,mass=0.001) :
         self.mass = mass 
         self.weight = mass*9.8
 
+
+
     def throw_from_ground(self,velocity,angle_in_deg=0,angle_in_rad=0) :
+
+        '''
+          This method will simulate throwing the initialised thing from groung up.
+          which takes in 3 arguments, i.e. initial velocity of the thing and two
+          optional arguments between which determine the angle to throw you can
+          either give the angle in degree or radian.
+        '''
+
         if angle_in_rad == 0 and angle_in_deg != 0 :
             angle = math.radians(angle_in_deg)
         else :
@@ -31,9 +45,10 @@ class thing :
         max_dist = (velocity**2)*(math.sin(angle)**2)/(2*9.8)
         plt.plot(xList,yList)
         
-        print(f"Total time in air : {T}")
-        print(f"Max horizontal distance : { max_height }")
-        print(f"Max height reached : { max_dist }")
+        print()
+        print(f"Total time in air(in seconds) : {T}")
+        print(f"Max horizontal distance(in meters) : { max_height }")
+        print(f"Max height reached(in meters) : { max_dist }")
         
         if max_height > max_dist :
             plt.ylim([0,max_height])
@@ -43,7 +58,14 @@ class thing :
         plt.show()
 
     def throw_horizontally(self,velocity,height) :
-        
+
+        '''
+          This method is similar in functionality to the above one,
+          the main difference being that this method throws the thing 
+          horizontally in front of you, because of which it only takes two 
+          arguments, i.e. initial velocity and height from which to throw.
+        '''
+
         x_pos = lambda t : velocity * t
         y_pos = lambda t : height - ((9.8*(t**2))/(2*(velocity**2))) 
         T = (2*height/9.8)**(1/2)
@@ -51,23 +73,29 @@ class thing :
         xList = [ x_pos(i) for i in np.arange(0,T,0.0001) ]
         yList = [ y_pos(i) for i in np.arange(0,T,0.0001) ]
         max_dist = velocity*T
+        
+        print()
         print(f"Total time in air : {T}")
         print(f"Max horizontal distance : { max_dist }")
-        print(yList)
         
         plt.plot(xList,yList)
+        '''
+          < Not implemented yet, just ignore >
         if height > max_dist :
-            plt.ylim([0,height])
+            plt.xlim([0,height])
         else :
-            plt.xlim([0,max_dist])
+            plt.ylim([0,max_dist])
+        '''
         plt.show()
-        
 
 
+if __name__ == "__main__":
+    
+    theObject = thing()
+    v = 10 # int(input("how much initial velocity(in m/s) do you want? : "))
+    d = 50 # int(input("at what angle(in degree) you want to throw at? : "))
+    theObject.throw_from_ground(v,angle_in_deg=d)
 
-
-
-
-if __name__ == "__main__" :
-
-    thing(6).throw_from_ground(50,angle_in_deg=87)
+    v = 5 # int(input("how much initial velocity(in m/s) do you want? : "))
+    h = 10 # int(input("from what height(in meters) you want to throw at? : "))
+    theObject.throw_horizontally(v,h)
