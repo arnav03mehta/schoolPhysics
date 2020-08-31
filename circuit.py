@@ -28,7 +28,15 @@ class capacitor(circuitElement) :
 class branch :
     def __init__(self,structure=[]) :
         self.structure = structure
-
+    def __repr__(self) :
+        return self.structure
+        
+    @property
+    def start(self) :
+        pass
+    @property
+    def end(self) :
+        pass
 
 class circuit :
     def __init__(self,structure=[]) :
