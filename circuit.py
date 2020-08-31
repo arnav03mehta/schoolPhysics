@@ -1,3 +1,4 @@
+import math
 
 class circuitElement :
     def __init__(self) :
@@ -6,8 +7,9 @@ class circuitElement :
         return "A base class for a circuit element"
 
 class battery(circuitElement) :
-    def __init__(self,voltage) :
+    def __init__(self,voltage,direction=True) :
         self.voltage = voltage
+        self.direction = direction
     def __repr__(self) :
         return f"{self.voltage}V battery"
 
