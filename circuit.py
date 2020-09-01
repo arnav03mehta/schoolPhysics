@@ -30,7 +30,6 @@ class branch :
         self.structure = structure
     def __repr__(self) :
         return self.structure
-        
     @property
     def start(self) :
         pass

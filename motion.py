@@ -1,3 +1,4 @@
+#%%#
 import math
 import matplotlib.pyplot as plt
 import numpy as np
@@ -58,7 +59,7 @@ class thing :
         print(f"Max horizontal distance(in meters) : { max_height }")
         print(f"Max height reached(in meters) : { max_dist }")
         
-        plt.plot(xList,yList)
+        plt.plot(xList,yList,label=legend_)
         plt.xlabel('---------- x -------->')
         plt.ylabel('---------- y -------->')
         plt.grid(True)
@@ -67,7 +68,7 @@ class thing :
             plt.ylim([0,max_height])
         else :
             plt.xlim([0,max_dist])
-        plt.legend([legend_])
+        plt.legend()
         plt.show()
 
     def throw_horizontally(self,velocity,height) :
@@ -81,32 +82,28 @@ class thing :
         '''
 
         x_pos = lambda t : velocity * t
-        y_pos = lambda t : height - ((g*(t**2))/(2*(velocity**2))) 
+
+        #y_pos = lambda t : height - ((g*(t**2))/(2*(velocity**2))) 
+
         T = (2*height/g)**(1/2)
+        max_dist = velocity*T
+
+        y_pos = lambda t : height- 0.5*g*(t**2)
 
         xList = [ x_pos(i) for i in np.arange(0,T,0.0001) ]
         yList = [ y_pos(i) for i in np.arange(0,T,0.0001) ]
-        max_dist = velocity*T
-        
+    
         print()
         print(f"Total time in air : {T}")
         print(f"Max horizontal distance : { max_dist }")
         
-        plt.plot(xList,yList)
+        plt.plot(xList,yList,label=f'{velocity}m/s, {height}m')
         plt.xlabel('---------- x -------->')
         plt.ylabel('---------- y -------->')
         plt.grid(True)
         
-        '''
-          < Not implemented yet, just ignore >
-          
-        if height > max_dist :
-            plt.xlim([0,height])
-        else :
-            plt.ylim([0,max_dist])
-        '''
-
-        plt.legend([f'{velocity}m/s, {height}m'])
+        plt.xlim([0,height])
+        plt.legend()
         plt.show()
 
 
@@ -120,9 +117,5 @@ if __name__ == "__main__":
     v = 5 # int(input("how much initial velocity(in m/s) do you want? : "))
     h = 10 # int(input("from what height(in meters) you want to throw at? : "))
     theObject.throw_horizontally(v,h)
-
-
-
-
 
 # %%
