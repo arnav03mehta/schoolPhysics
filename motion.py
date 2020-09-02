@@ -1,7 +1,10 @@
 #%%#
 import math
 import matplotlib.pyplot as plt
+from matplotlib.pyplot import legend
 import numpy as np
+
+plt.style.use("fivethirtyeight")
 
 class thing :
     
@@ -71,6 +74,8 @@ class thing :
         plt.legend()
         plt.show()
 
+        
+
     def throw_horizontally(self,velocity,height) :
         g = self.g
 
@@ -105,6 +110,8 @@ class thing :
         plt.xlim([0,height])
         plt.legend()
         plt.show()
+
+        
 
 
 if __name__ == "__main__":
